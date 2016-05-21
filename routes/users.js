@@ -24,18 +24,16 @@ router.post('/add', function(req, res, next){
   });
 });
 
-router.post('/update', function(req,res,next){
-  models.User.update({
-    username: 'updated'
-  },{
-     where: { id : 1 }
+router.put('/update/:id', function(req,res,next){
+  models.User.update(req.body,{
+     where: { id : req.params.id }
   }).then(function (result) {
-    console.log("User updated : ");
+    
   });
 });
 
 
-router.post('/delete', function(req, res, next){
+router.delete('/delete/:id', function(req, res, next){
   models.User.destroy({where: {id : req.params.id}})
   .then(function(result){
     console.log("Deleted user : " + req.params.id);
